@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import ArtCard from './Artcard';
 import React, { useState } from 'react';
+import Profile from './Profile';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState("explore");
 
   const artList = [
     { id: 1, title: "Starry Night", artist: "Vincent", url: "https://placedog.net/500" },
@@ -20,23 +21,34 @@ function App() {
     <div className="App">
       <h1>Explore Art</h1>
 
-      <input
-        type="text"
-        placeholder="Search user..."
-        style={{ padding: '10px', width: '300px', marginBottom: '20px' }}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <nav style={{ padding: '10px', background: '#333' }}>
+        <button onClick={() => setPage("explore")}>Explore</button>
+        <button onClick={() => setPage("me")}>Me Section</button>
+      </nav>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {filteredArt.map(art => (
-          <ArtCard
-            key={art.id}
-            title={art.title}
-            artist={art.artist}
-            imageUrl={art.url}
+      {page === "explore" ? (
+        <>
+          <input
+            type="text"
+            placeholder="Search artist..."
+            style={{ padding: '10px', width: '300px', marginBottom: '20px' }}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-        ))}
-      </div>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {filteredArt.map(art => (
+              <ArtCard
+                key={art.id}
+                title={art.title}
+                artist={art.artist}
+                imageUrl={art.url}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <Profile />
+      )}
     </div>
   );
 }
