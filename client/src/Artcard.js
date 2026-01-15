@@ -4,23 +4,28 @@ import React, { useState } from 'react';
 function ArtCard({ title, artist, imageUrl }) {
     const [liked, setLiked] = useState(false);
     return (
-        <div style={{ border: '1px solid #ddd', borderRadius: '10px', padding: '10px', margin: '10px', width: '250px' }}>
-            <img src={imageUrl} alt={title} style={{ width: '100%', borderRadius: '5px' }} />
-            <h3>{title}</h3>
-            <p>By: {artist}</p>
+        <div style={{
+            backgroundColor: '#c7b3e0',
+            borderRadius: '20px',
+            padding: '15px',
+            width: '220px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+            textAlign: 'center'
+        }}>
+            <img src={imageUrl} alt={title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '15px' }} />
+            <p style={{ margin: '15px 0 5px' }}>by: {artist}</p>
             <button
                 onClick={() => setLiked(!liked)}
                 style={{
-                    padding: '8px 15px',
-                    cursor: 'pointer',
-                    backgroundColor: liked ? '#ff4b5cff' : '#eee',
-                    color: liked ? 'white' : 'black',
+                    backgroundColor: 'white',
                     border: 'none',
-                    borderRadius: '5px'
+                    padding: '5px 20px',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    color: liked ? 'red' : 'gray'
                 }}
             >
-
-                {liked ? 'Liked ✨' : 'Like'}
+                {liked ? 'Liked' : 'Like'}
             </button>
         </div>
     );
